@@ -1,24 +1,23 @@
 provider "null" {
-    version = "=2.0.0"
+  version = "=2.0.0"
 }
 
 module "aks" "cluster" {
   source = "../aks"
 
-    resource_group_name       = "${var.resource_group_name}"
-    resource_group_location   = "${var.resource_group_location}"
-    cluster_name              = "${var.cluster_name}"
-    cluster_location          = "${var.cluster_location}"
-    kubernetes_version        = "${var.kubernetes_version}"
-    dns_prefix                = "${var.dns_prefix}"
-    vnet_address_space        = "${var.vnet_address_space}"
-    subnet_address_space      = "${var.subnet_address_space}"
-    agent_vm_count            = "${var.agent_vm_count}"
-    agent_vm_size             = "${var.agent_vm_size}"
-    admin_user                = "${var.admin_user}"
-    ssh_public_key            = "${var.ssh_public_key}"
-    client_id                 = "${var.client_id}"
-    client_secret             = "${var.client_secret}"
+  resource_group_name     = "${var.resource_group_name}"
+  resource_group_location = "${var.resource_group_location}"
+  cluster_name            = "${var.cluster_name}"
+  cluster_location        = "${var.cluster_location}"
+  kubernetes_version      = "${var.kubernetes_version}"
+  cluster_subnet_id       = "${var.cluster_subnet_id}"
+  dns_prefix              = "${var.dns_prefix}"
+  agent_vm_count          = "${var.agent_vm_count}"
+  agent_vm_size           = "${var.agent_vm_size}"
+  admin_user              = "${var.admin_user}"
+  ssh_public_key          = "${var.ssh_public_key}"
+  client_id               = "${var.client_id}"
+  client_secret           = "${var.client_secret}"
 }
 
 resource "null_resource" "cluster_credentials" {
