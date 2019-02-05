@@ -24,8 +24,8 @@ variable "agent_vm_count" {
 }
 
 variable "agent_vm_size" {
-  type    = "string"
-  default = "Standard_DS3_v2"
+    type = "string"
+    default = "Standard_DS2_v3"
 }
 
 variable "admin_user" {
