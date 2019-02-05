@@ -1,6 +1,8 @@
 .terraform
 deployments
 terraform.tfstate
+terraform.tfvars
 terraform.tfstate.backup
 translations
 istio-1.0.4
+output
