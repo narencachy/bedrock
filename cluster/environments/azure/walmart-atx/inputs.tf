@@ -18,6 +18,21 @@ variable "dns_prefix" {
   type = "string"
 }
 
+variable "virtual_node_subnet_cidr" {
+  type    = "string"
+  default = "10.200.0.0/24"
+}
+
+variable "cluster_subnet_cidr" {
+  type    = "string"
+  default = "10.200.1.0/24"
+}
+
+variable "vnet_cidr" {
+  type    = "string"
+  default = "10.200.0.0/16"
+}
+
 variable "agent_vm_count" {
   type    = "string"
   default = "3"
@@ -42,6 +57,19 @@ variable "service_principal_id" {
 }
 
 variable "service_principal_secret" {
+  type = "string"
+}
+
+variable "flux_repo_url" {
+  type    = "string"
+  default = "https://github.com/weaveworks/flux.git"
+}
+
+variable "gitops_url" {
+  type = "string"
+}
+
+variable "gitops_ssh_key" {
   type = "string"
 }
 
