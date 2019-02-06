@@ -18,11 +18,6 @@ variable "resource_tags" {
   default     = {}
 }
 
-variable "storage_account_tier" {
-  description = "(Required) Defines the Tier to use for this storage account. Valid options are Standard* and Premium. Changing this forces a new resource to be created"
-  default     = "Premium"
-}
-
 variable "storage_account_replication_type" {
   description = "(Required) Defines the type of replication to use for this storage account. Valid options are LRS*, GRS, RAGRS and ZRS."
   default     = "LRS"
