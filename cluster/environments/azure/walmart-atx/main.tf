@@ -3,25 +3,24 @@ module "provider" {
 }
 
 module "vnet" {
-  source              = "Azure/vnet/azurerm"
+  source              = "../vnet"
   resource_group_name = "${var.resource_group_name}"
   location            = "${var.resource_group_location}"
   address_space       = "${var.vnet_cidr}"
   subnet_prefixes     = ["${var.cluster_subnet_cidr}", "${var.virtual_node_subnet_cidr}"]
-  subnet_names        = ["${var.cluster_name}-cluster-subnet", "${var.cluster_name}-virtual-node-subnet"]
+  subnet_names        = ["${var.cluster_name}-aks-subnet", "${var.cluster_name}-virtual-node-subnet"]
 
   tags = {
     environment = "prod"
   }
 }
 
-module "aks_flux" "cluster" {
+module "aks_flux" {
   source = "../../../templates/azure/aks-flux"
 
   resource_group_name     = "${var.resource_group_name}"
   resource_group_location = "${var.resource_group_location}"
   cluster_name            = "${var.cluster_name}"
-  cluster_location        = "${var.cluster_location}"
   kubernetes_version      = "${var.kubernetes_version}"
   dns_prefix              = "${var.dns_prefix}"
   cluster_subnet_id       = "${module.vnet.vnet_subnets[0]}"
@@ -37,12 +36,6 @@ module "aks_flux" "cluster" {
   gitops_ssh_key          = "${var.gitops_ssh_key}"
 }
 
-resource "null_resource" "cluster_creation_barrier" {
-  provisioner "local-exec" {
-    command = "echo ${module.aks_flux.kube_config} > /dev/null"
-  }
-}
-
 /*
 resource "null_resource" "install_virtual_node_extension" {
   provisioner "local-exec" {
@@ -55,5 +48,5 @@ resource "null_resource" "enable_virtual_node_addon" {
     command = "az aks enable-addons --resource-group ${var.resource_group_name} --name ${var.cluster_name} --addons virtual-node --subnet-name ${var.cluster_name}-virtual-node-subnet"
   }
 
-  depends_on = ["null_resource.cluster_creation_barrier"]
+  depends_on = ["module.aks_flux"]
 }

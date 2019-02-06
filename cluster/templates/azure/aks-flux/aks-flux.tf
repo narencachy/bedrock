@@ -2,13 +2,12 @@ provider "null" {
   version = "=2.0.0"
 }
 
-module "aks" "cluster" {
+module "aks" {
   source = "../aks"
 
   resource_group_name     = "${var.resource_group_name}"
   resource_group_location = "${var.resource_group_location}"
   cluster_name            = "${var.cluster_name}"
-  cluster_location        = "${var.cluster_location}"
   kubernetes_version      = "${var.kubernetes_version}"
   cluster_subnet_id       = "${var.cluster_subnet_id}"
   dns_prefix              = "${var.dns_prefix}"

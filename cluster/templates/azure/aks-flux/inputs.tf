@@ -10,10 +10,6 @@ variable "cluster_name" {
   type = "string"
 }
 
-variable "cluster_location" {
-  type = "string"
-}
-
 variable "dns_prefix" {
   type = "string"
 }

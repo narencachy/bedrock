@@ -10,29 +10,28 @@ variable "cluster_name" {
   type = "string"
 }
 
-variable "cluster_location" {
-  type = "string"
-}
-
 variable "dns_prefix" {
-  type = "string"
-}
-
-variable "virtual_node_subnet_cidr" {
-  type = "string"
-}
-
-variable "cluster_subnet_cidr" {
   type = "string"
 }
 
 variable "vnet_cidr" {
   type = "string"
+  default = "10.200.0.0/16"
+}
+
+variable "cluster_subnet_cidr" {
+  type = "string"
+  default = "10.200.1.0/24"
+}
+
+variable "virtual_node_subnet_cidr" {
+  type = "string"
+  default = "10.200.2.0/24"
 }
 
 variable "agent_vm_count" {
   type    = "string"
-  default = "3"
+  default = "2"
 }
 
 variable "agent_vm_size" {
